@@ -216,6 +216,10 @@ func IsHostname(target string) bool {
 //	Not valid: 123-google-project
 
 func IsGCPProjectId(target string) bool {
+	if IsHostname(target) {
+		return false
+	}
+
 	matched, err := regexp.MatchString("^[a-z][-a-z0-9]{4,28}[a-z0-9]{1}$", target)
 
 	if err != nil {
